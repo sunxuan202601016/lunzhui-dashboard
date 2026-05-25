@@ -338,8 +338,13 @@
             border-color: var(--secondary);
             font-weight: 600;
         }
-        .global-year-indicator {
+        .global-filter-right {
             margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .global-year-indicator {
             font-size: 12px;
             color: var(--text-muted);
             background: var(--bg-section);
@@ -1365,12 +1370,14 @@
                 <span class="global-scope-chip" data-scope="ex">基准值2常规机构</span>
                 <span class="global-scope-chip" data-scope="compare">基准值1全部数据 vs 基准值2常规机构</span>
             </div>
-            <div class="global-year-indicator" id="global-year-indicator">
-                当前展示：<strong>全部年份｜全部数据</strong>
+            <div class="global-filter-right">
+                <div class="global-year-indicator" id="global-year-indicator">
+                    当前展示：<strong>全部年份｜全部数据</strong>
+                </div>
+                <button class="label-toggle-btn" id="labelToggleBtn" onclick="toggleLabels()">
+                    <span>💡</span> 智能标签
+                </button>
             </div>
-            <button class="label-toggle-btn" id="labelToggleBtn" onclick="toggleLabels()">
-                <span>💡</span> 智能标签
-            </button>
         </div>
     </div>
 
