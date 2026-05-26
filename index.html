@@ -1581,6 +1581,7 @@
     </nav>
     <!-- Global Year Filter -->
     <div class="global-filter-bar">
+        <!-- 第一行：年份筛选 + 右侧指示器 -->
         <div class="global-filter-inner">
             <span class="global-filter-label">数据年份</span>
             <div class="global-year-selector" id="global-year-selector">
@@ -1596,12 +1597,6 @@
                 <span class="global-year-chip" data-year="2017">2017</span>
                 <span class="global-year-chip" data-year="2016">2016</span>
             </div>
-            <span class="global-filter-label">全局数据口径筛选器</span>
-            <div class="global-scope-selector" id="global-scope-selector">
-                <span class="global-scope-chip active" data-scope="all">基准值1全部数据</span>
-                <span class="global-scope-chip" data-scope="ex">基准值2常规机构</span>
-                <span class="global-scope-chip" data-scope="compare">基准值1全部数据 vs 基准值2常规机构</span>
-            </div>
             <div class="global-filter-right">
                 <div class="global-year-indicator" id="global-year-indicator">
                     当前展示：<strong>全部年份｜全部数据</strong>
@@ -1609,6 +1604,15 @@
                 <button class="label-toggle-btn" id="labelToggleBtn" onclick="toggleLabels()">
                     <span>💡</span> 智能标签
                 </button>
+            </div>
+        </div>
+        <!-- 第二行：数据口径筛选器 -->
+        <div class="global-filter-inner" style="padding-top: 0; border-top: 1px solid var(--border-light);">
+            <span class="global-filter-label">全局数据口径筛选器</span>
+            <div class="global-scope-selector" id="global-scope-selector">
+                <span class="global-scope-chip active" data-scope="all">基准值1全部数据</span>
+                <span class="global-scope-chip" data-scope="ex">基准值2常规机构</span>
+                <span class="global-scope-chip" data-scope="compare">基准值1全部数据 vs 基准值2常规机构</span>
             </div>
         </div>
     </div>
