@@ -5344,7 +5344,7 @@
                     labels: tierAll.tiers,
                     datasets: [
                         { label: '全部数据', data: tierAll.donors, backgroundColor: 'rgba(30, 58, 95, 0.8)' },
-                        { label: '常规机构的数据', data: tierEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.7)' }
+                        { label: '常规机构', data: tierEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.7)' }
                     ]
                 },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { ticks: { callback: v => formatNumber(v) } } } }
@@ -5357,7 +5357,7 @@
                     labels: tierAll.tiers,
                     datasets: [
                         { label: '全部数据', data: tierAll.amount, backgroundColor: 'rgba(30, 58, 95, 0.8)' },
-                        { label: '常规机构的数据', data: tierEx.amount, backgroundColor: 'rgba(224, 123, 57, 0.7)' }
+                        { label: '常规机构', data: tierEx.amount, backgroundColor: 'rgba(224, 123, 57, 0.7)' }
                     ]
                 },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { ticks: { callback: v => r2(v / 10000).toFixed(2) + '万' } } } }
@@ -5822,10 +5822,10 @@
                     labels: orgAll.names,
                     datasets: [
                         { label: '全部数据', data: orgAll.donors, backgroundColor: 'rgba(30, 58, 95, 0.8)', borderRadius: 4, datalabels: { color: '#1e3a5f', align: 'end', anchor: 'end', offset: 2, formatter: v => formatNumber(v), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } },
-                        { label: '常规机构（剔出HHAX）', data: orgEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.8)', borderRadius: 4, hidden: true, datalabels: { color: '#e07b39', align: 'end', anchor: 'end', offset: 2, formatter: v => formatNumber(v), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
+                        { label: '常规机构', data: orgEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.8)', borderRadius: 4, hidden: true, datalabels: { color: '#e07b39', align: 'end', anchor: 'end', offset: 2, formatter: v => formatNumber(v), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
                     ]
                 },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 50 } }, plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12 } } }, scales: { x: { ticks: { callback: v => formatNumber(v) } } } }
+                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 50 } }, plugins: { legend: { position: 'bottom', align: 'start', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12, boxWidth: 10, padding: 8 } } }, scales: { x: { ticks: { callback: v => formatNumber(v) } } } }
             });
 
             const amountCtx = document.getElementById('org-amountChart').getContext('2d');
@@ -5835,10 +5835,10 @@
                     labels: orgAll.names,
                     datasets: [
                         { label: '全部数据', data: orgAll.amounts.map(a => a / 100000000), backgroundColor: 'rgba(212, 168, 75, 0.8)', borderRadius: 4, datalabels: { color: '#b8942f', align: 'end', anchor: 'end', offset: 2, formatter: v => formatMoney(v * 100000000), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } },
-                        { label: '常规机构（剔出HHAX）', data: orgEx.amounts.map(a => a / 100000000), backgroundColor: 'rgba(224, 123, 57, 0.65)', borderRadius: 4, hidden: true, datalabels: { color: '#e07b39', align: 'end', anchor: 'end', offset: 2, formatter: v => formatMoney(v * 100000000), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
+                        { label: '常规机构', data: orgEx.amounts.map(a => a / 100000000), backgroundColor: 'rgba(224, 123, 57, 0.65)', borderRadius: 4, hidden: true, datalabels: { color: '#e07b39', align: 'end', anchor: 'end', offset: 2, formatter: v => formatMoney(v * 100000000), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
                     ]
                 },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 55 } }, plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12 } } }, scales: { x: { ticks: { callback: v => v.toFixed(1) + '亿' } } } }
+                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 55 } }, plugins: { legend: { position: 'bottom', align: 'start', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12, boxWidth: 10, padding: 8 } } }, scales: { x: { ticks: { callback: v => v.toFixed(1) + '亿' } } } }
             });
 
             const retCtx = document.getElementById('org-retentionChart').getContext('2d');
@@ -5848,10 +5848,10 @@
                     labels: orgAll.names,
                     datasets: [
                         { label: '全部数据', data: orgAll.retention.map(r => r * 100), backgroundColor: 'rgba(30, 58, 95, 0.8)', borderRadius: 4, datalabels: { color: '#1e3a5f', align: 'end', anchor: 'end', offset: 2, formatter: v => v.toFixed(0) + '%', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } },
-                        { label: '常规机构（剔出HHAX）', data: orgEx.retention.map(r => r * 100), backgroundColor: 'rgba(224, 123, 57, 0.8)', borderRadius: 4, hidden: true, datalabels: { color: '#e07b39', align: 'start', anchor: 'end', offset: 2, formatter: v => v.toFixed(0) + '%', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
+                        { label: '常规机构', data: orgEx.retention.map(r => r * 100), backgroundColor: 'rgba(224, 123, 57, 0.8)', borderRadius: 4, hidden: true, datalabels: { color: '#e07b39', align: 'start', anchor: 'end', offset: 2, formatter: v => v.toFixed(0) + '%', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
                     ]
                 },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 50 } }, plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12 } } }, scales: { x: { ticks: { callback: v => v.toFixed(0) + '%' }, max: 100, title: { display: true, text: '留存率' } } } }
+                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 50 } }, plugins: { legend: { position: 'bottom', align: 'start', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12, boxWidth: 10, padding: 8 } } }, scales: { x: { ticks: { callback: v => v.toFixed(0) + '%' }, max: 100, title: { display: true, text: '留存率' } } } }
             });
 
             switchOrg('all');
@@ -6047,14 +6047,14 @@
                     datasets: [
                         { label: '全部数据', data: sortedAll.donors, backgroundColor: 'rgba(30, 58, 95, 0.8)', barPercentage: 0.8, borderRadius: 3,
                           datalabels: { color: '#1e3a5f', align: 'end', anchor: 'end', offset: 4, formatter: v => formatNumber(v), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } },
-                        { label: '常规机构（剔出HHAX）', data: sortedEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.8)', barPercentage: 0.8, borderRadius: 3, hidden: true,
+                        { label: '常规机构', data: sortedEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.8)', barPercentage: 0.8, borderRadius: 3, hidden: true,
                           datalabels: { color: '#e07b39', align: 'end', anchor: 'end', offset: 4, formatter: v => formatNumber(v), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
                     ]
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false, indexAxis: 'y',
                     layout: { padding: { right: 60 } },
-                    plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12 } } },
+                    plugins: { legend: { position: 'bottom', align: 'start', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12, boxWidth: 10, padding: 8 } } },
                     scales: { x: { ticks: { callback: v => formatNumber(v) } } }
                 }
             });
@@ -6067,14 +6067,14 @@
                     datasets: [
                         { label: '全部数据', data: sortedAll.amounts.map(a => a / 10000), backgroundColor: 'rgba(212, 168, 75, 0.8)', barPercentage: 0.8, borderRadius: 3,
                           datalabels: { color: '#b8942f', align: 'end', anchor: 'end', offset: 4, formatter: v => r2(v).toFixed(2) + '万', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } },
-                        { label: '常规机构（剔出HHAX）', data: sortedEx.amounts.map(a => a / 10000), backgroundColor: 'rgba(224, 123, 57, 0.65)', barPercentage: 0.8, borderRadius: 3, hidden: true,
+                        { label: '常规机构', data: sortedEx.amounts.map(a => a / 10000), backgroundColor: 'rgba(224, 123, 57, 0.65)', barPercentage: 0.8, borderRadius: 3, hidden: true,
                           datalabels: { color: '#e07b39', align: 'end', anchor: 'end', offset: 4, formatter: v => r2(v).toFixed(2) + '万', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
                     ]
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false, indexAxis: 'y',
                     layout: { padding: { right: 60 } },
-                    plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12 } } },
+                    plugins: { legend: { position: 'bottom', align: 'start', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12, boxWidth: 10, padding: 8 } } },
                     scales: { x: { ticks: { callback: v => r2(v).toFixed(2) + '万' } } }
                 }
             });
@@ -6091,13 +6091,13 @@
                     datasets: [
                         { label: '全部数据', data: sortedRetAll.map(d => d.retention * 100), backgroundColor: 'rgba(30, 58, 95, 0.8)', barPercentage: 0.8, borderRadius: 3,
                           datalabels: { color: '#1e3a5f', align: 'end', anchor: 'end', offset: 4, formatter: v => r2(v).toFixed(2) + '%', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } },
-                        { label: '常规机构（剔出HHAX）', data: sortedRetEx.map(d => d.retention * 100), backgroundColor: 'rgba(224, 123, 57, 0.8)', barPercentage: 0.8, borderRadius: 3, hidden: true,
+                        { label: '常规机构', data: sortedRetEx.map(d => d.retention * 100), backgroundColor: 'rgba(224, 123, 57, 0.8)', barPercentage: 0.8, borderRadius: 3, hidden: true,
                           datalabels: { color: '#e07b39', align: 'end', anchor: 'end', offset: 4, formatter: v => r2(v).toFixed(2) + '%', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
                     ]
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false, indexAxis: 'y',
-                    plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12 } } },
+                    plugins: { legend: { position: 'bottom', align: 'start', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12, boxWidth: 10, padding: 8 } } },
                     scales: { x: { ticks: { callback: v => r2(v).toFixed(2) + '%' }, max: 100 } }
                 }
             });
@@ -6155,7 +6155,7 @@
                     labels: hourLabels,
                     datasets: [
                         { label: '全部数据', data: bindAll.donors, backgroundColor: 'rgba(30, 58, 95, 0.8)', borderRadius: 2 },
-                        { label: '常规机构的数据', data: bindEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.7)', borderRadius: 2 }
+                        { label: '常规机构', data: bindEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.7)', borderRadius: 2 }
                     ]
                 },
                 options: {
@@ -6175,7 +6175,7 @@
                     labels: hourLabels,
                     datasets: [
                         { label: '全部数据', data: bindAll.amounts, backgroundColor: 'rgba(212, 168, 75, 0.8)', borderRadius: 2 },
-                        { label: '常规机构的数据', data: bindEx.amounts, backgroundColor: 'rgba(212, 117, 138, 0.7)', borderRadius: 2 }
+                        { label: '常规机构', data: bindEx.amounts, backgroundColor: 'rgba(212, 117, 138, 0.7)', borderRadius: 2 }
                     ]
                 },
                 options: {
@@ -6197,7 +6197,7 @@
                     labels: cancelLabels,
                     datasets: [
                         { label: '全部数据', data: cancelAll.donors, backgroundColor: 'rgba(30, 58, 95, 0.8)', borderRadius: 2 },
-                        { label: '常规机构的数据', data: cancelEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.7)', borderRadius: 2 }
+                        { label: '常规机构', data: cancelEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.7)', borderRadius: 2 }
                     ]
                 },
                 options: {
@@ -6217,7 +6217,7 @@
                     labels: cancelLabels,
                     datasets: [
                         { label: '全部数据', data: cancelAll.amounts, backgroundColor: 'rgba(212, 168, 75, 0.8)', borderRadius: 2 },
-                        { label: '常规机构的数据', data: cancelEx.amounts, backgroundColor: 'rgba(212, 117, 138, 0.7)', borderRadius: 2 }
+                        { label: '常规机构', data: cancelEx.amounts, backgroundColor: 'rgba(212, 117, 138, 0.7)', borderRadius: 2 }
                     ]
                 },
                 options: {
