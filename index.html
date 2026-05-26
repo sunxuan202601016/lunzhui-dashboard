@@ -4404,7 +4404,7 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { padding: 16, font: { size: 11 }, usePointStyle: true } },
+                        legend: { position: 'bottom', labels: { padding: 16, font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12 } },
                         tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw.toFixed(1) + '%' } },
                         datalabels: { display: false }
                     },
@@ -4506,7 +4506,7 @@
                     options: {
                         responsive: true, maintainAspectRatio: false,
                         plugins: {
-                            legend: { position: 'bottom', labels: { padding: 10, font: { size: 10 }, usePointStyle: true } },
+                            legend: { position: 'bottom', labels: { padding: 10, font: { size: 10 }, usePointStyle: true, pointStyleWidth: 12 } },
                             datalabels: {
                                 display: true,
                                 anchor: 'end',
@@ -4625,7 +4625,7 @@
                     options: {
                         responsive: true, maintainAspectRatio: false,
                         plugins: {
-                            legend: { position: 'bottom', labels: { padding: 10, font: { size: 10 }, usePointStyle: true } },
+                            legend: { position: 'bottom', labels: { padding: 10, font: { size: 10 }, usePointStyle: true, pointStyleWidth: 12 } },
                             datalabels: {
                                 display: true, anchor: 'end', align: 'end', offset: 4,
                                 font: { size: 8, weight: '600' },
@@ -4665,7 +4665,7 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { padding: 10, font: { size: 10 }, usePointStyle: true } },
+                        legend: { position: 'bottom', labels: { padding: 10, font: { size: 10 }, usePointStyle: true, pointStyleWidth: 12 } },
                         datalabels: {
                             display: true, anchor: 'end', align: 'end', offset: 2,
                             font: { size: 9, weight: '600' },
@@ -4946,7 +4946,7 @@
                         barPercentage: 0.7
                     }
                 ];
-                ch.options.plugins.legend = { display: true, position: 'bottom', labels: { padding: 12, font: { size: 12 }, usePointStyle: true } };
+                ch.options.plugins.legend = { display: true, position: 'bottom', labels: { padding: 12, font: { size: 12 }, usePointStyle: true, pointStyleWidth: 12 } };
                 ch.options.plugins.datalabels.formatter = null; // hide datalabels in compare mode for clarity
             } else {
                 const data = tierRetentionScope === 'all' ? tierAll : tierEx;
@@ -5591,7 +5591,7 @@
                         { label: '常规机构（剔出HHAX）', data: orgEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.8)', borderRadius: 4, hidden: true, datalabels: { color: '#e07b39', align: 'end', anchor: 'end', offset: 2, formatter: v => formatNumber(v), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
                     ]
                 },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 50 } }, plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 8 } } }, scales: { x: { ticks: { callback: v => formatNumber(v) } } } }
+                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 50 } }, plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12 } } }, scales: { x: { ticks: { callback: v => formatNumber(v) } } } }
             });
 
             const amountCtx = document.getElementById('org-amountChart').getContext('2d');
@@ -5604,7 +5604,7 @@
                         { label: '常规机构（剔出HHAX）', data: orgEx.amounts.map(a => a / 100000000), backgroundColor: 'rgba(224, 123, 57, 0.65)', borderRadius: 4, hidden: true, datalabels: { color: '#e07b39', align: 'end', anchor: 'end', offset: 2, formatter: v => formatMoney(v * 100000000), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
                     ]
                 },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 55 } }, plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 8 } } }, scales: { x: { ticks: { callback: v => v.toFixed(1) + '亿' } } } }
+                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 55 } }, plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12 } } }, scales: { x: { ticks: { callback: v => v.toFixed(1) + '亿' } } } }
             });
 
             const retCtx = document.getElementById('org-retentionChart').getContext('2d');
@@ -5617,7 +5617,7 @@
                         { label: '常规机构（剔出HHAX）', data: orgEx.retention.map(r => r * 100), backgroundColor: 'rgba(224, 123, 57, 0.8)', borderRadius: 4, hidden: true, datalabels: { color: '#e07b39', align: 'start', anchor: 'end', offset: 2, formatter: v => v.toFixed(0) + '%', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
                     ]
                 },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 50 } }, plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 8 } } }, scales: { x: { ticks: { callback: v => v.toFixed(0) + '%' }, max: 100, title: { display: true, text: '留存率' } } } }
+                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 50 } }, plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12 } } }, scales: { x: { ticks: { callback: v => v.toFixed(0) + '%' }, max: 100, title: { display: true, text: '留存率' } } } }
             });
 
             switchOrg('all');
@@ -5820,7 +5820,7 @@
                 options: {
                     responsive: true, maintainAspectRatio: false, indexAxis: 'y',
                     layout: { padding: { right: 60 } },
-                    plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 8 } } },
+                    plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12 } } },
                     scales: { x: { ticks: { callback: v => formatNumber(v) } } }
                 }
             });
@@ -5840,7 +5840,7 @@
                 options: {
                     responsive: true, maintainAspectRatio: false, indexAxis: 'y',
                     layout: { padding: { right: 60 } },
-                    plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 8 } } },
+                    plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12 } } },
                     scales: { x: { ticks: { callback: v => r2(v).toFixed(2) + '万' } } }
                 }
             });
@@ -5863,7 +5863,7 @@
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false, indexAxis: 'y',
-                    plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 8 } } },
+                    plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 12 } } },
                     scales: { x: { ticks: { callback: v => r2(v).toFixed(2) + '%' }, max: 100 } }
                 }
             });
@@ -6103,7 +6103,7 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: { 
-                        legend: { position: 'top', labels: { usePointStyle: true, padding: 20 } },
+                        legend: { position: 'top', labels: { usePointStyle: true, pointStyleWidth: 12, padding: 20 } },
                         tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw.toFixed(1) + '%' } },
                         datalabels: { display: false }
                     },
