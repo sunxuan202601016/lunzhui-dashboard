@@ -1608,7 +1608,6 @@
         </div>
         <!-- 第二行：数据口径筛选器 -->
         <div class="global-filter-inner" style="padding-top: 0; border-top: 1px solid var(--border-light);">
-            <span class="global-filter-label">全局数据口径筛选器</span>
             <div class="global-scope-selector" id="global-scope-selector">
                 <span class="global-scope-chip active" data-scope="all">基准值1全部数据</span>
                 <span class="global-scope-chip" data-scope="ex">基准值2常规机构</span>
@@ -3569,9 +3568,9 @@
             // Retention flow table
             if (document.getElementById('retention-flow-section')) renderRetentionFlow();
             // Retention distribution chart
-            updateRetentionDistChart(globalDataScope === 'compare' ? 'all' : globalDataScope);
-            updateNaturalYearCharts(globalDataScope === 'compare' ? 'all' : globalDataScope);
-            updateNextYearRetCharts(globalDataScope === 'compare' ? 'all' : globalDataScope, globalSelectedYear);
+            updateRetentionDistChart(globalDataScope);
+            updateNaturalYearCharts(globalDataScope);
+            updateNextYearRetCharts(globalDataScope, globalSelectedYear);
             // Show/hide insights module
             const insightsMod = document.getElementById('module-scope-insights');
             if (insightsMod) {
@@ -3862,10 +3861,10 @@
                 }
             }
             // Refresh next-year retention module with new year
-            updateNextYearRetCharts(globalDataScope === 'compare' ? 'all' : globalDataScope, year);
+            updateNextYearRetCharts(globalDataScope, year);
             // Refresh organization module with new year
             if (charts.organization) {
-                switchOrg(globalDataScope === 'compare' ? 'all' : globalDataScope);
+                switchOrg(globalDataScope);
             }
         }
 
