@@ -3315,7 +3315,7 @@
             }
             // Topic module
             if (charts.topic) {
-                switchTopic(globalDataScope === 'compare' ? 'all' : globalDataScope);
+                switchTopic(globalDataScope);
             }
             // Behavior module
             if (charts.behavior) {
@@ -5653,9 +5653,10 @@
                 if (activeChip) activeChip.classList.add('active');
             }
             topicSort = sortBy;
-            // Refresh current topic view
-            switchTopic('all');
+            switchTopic(currentTopicMode || 'all');
         }
+
+        let currentTopicMode = 'all';
 
         // Plugin to draw data labels on horizontal bar charts (smart mode support)
         const barDataLabelsPlugin = {
@@ -5709,15 +5710,21 @@
         };
 
         function switchTopic(type) {
+            currentTopicMode = type;
             document.querySelectorAll('#module-topic .toggle-btn').forEach(b => b.classList.remove('active'));
-            if (typeof event !== 'undefined' && event.target && event.target.classList) {
+            if (type === 'compare') {
+                document.querySelectorAll('#module-topic .toggle-btn').forEach(b => b.classList.add('active'));
+            } else if (typeof event !== 'undefined' && event.target && event.target.classList) {
                 event.target.classList.add('active');
             } else {
                 const activeBtn = document.querySelector(`#module-topic .toggle-btn[onclick*="switchTopic('${type}')"]`);
                 if (activeBtn) activeBtn.classList.add('active');
             }
 
-            const rawData = type === 'all' ? topicAll : topicAll;
+            const isAll = type === 'all';
+            const isCompare = type === 'compare';
+            const isEx = type === 'ex';
+            const rawData = isAll || isCompare ? topicAll : topicEx;
             const data = getSortedTopicData(rawData);
             const total = rawData.donors.reduce((a, b) => a + b, 0);
 
@@ -5745,21 +5752,39 @@
             `;
 
             if (charts.topic) {
-                charts.topic.donors.data.labels = data.names;
-                charts.topic.donors.data.datasets[0].data = data.donors;
+                // Donors chart: update both datasets, toggle visibility
+                const sortedAll = getSortedTopicData(topicAll);
+                const sortedEx = getSortedTopicData(topicEx);
+                charts.topic.donors.data.labels = sortedAll.names;
+                charts.topic.donors.data.datasets[0].data = sortedAll.donors;
+                charts.topic.donors.data.datasets[1].data = sortedEx.donors;
+                charts.topic.donors.data.datasets[0].hidden = isEx && !isCompare;
+                charts.topic.donors.data.datasets[1].hidden = isAll && !isCompare;
                 charts.topic.donors.update();
-                charts.topic.amount.data.labels = data.names;
-                charts.topic.amount.data.datasets[0].data = data.amounts.map(a => a / 10000);
+
+                // Amount chart
+                charts.topic.amount.data.labels = sortedAll.names;
+                charts.topic.amount.data.datasets[0].data = sortedAll.amounts.map(a => a / 10000);
+                charts.topic.amount.data.datasets[1].data = sortedEx.amounts.map(a => a / 10000);
+                charts.topic.amount.data.datasets[0].hidden = isEx && !isCompare;
+                charts.topic.amount.data.datasets[1].hidden = isAll && !isCompare;
                 charts.topic.amount.update();
-                // Retention chart always sorted by retention desc
-                const sortedRetention = [...rawData.names].map((n, i) => ({ name: n, retention: rawData.retention[i] }))
+
+                // Retention chart (sorted by retention desc from all data)
+                const sortedRetAll = [...topicAll.names].map((n, i) => ({ name: n, retention: topicAll.retention[i] }))
                     .sort((a, b) => b.retention - a.retention);
-                charts.topic.retention.data.labels = sortedRetention.map(d => d.name);
-                charts.topic.retention.data.datasets[0].data = sortedRetention.map(d => d.retention * 100);
+                const sortedRetEx = [...topicEx.names].map((n, i) => ({ name: n, retention: topicEx.retention[i] }));
+                const retExMap = {};
+                sortedRetEx.forEach(d => { retExMap[d.name] = d.retention; });
+                charts.topic.retention.data.labels = sortedRetAll.map(d => d.name);
+                charts.topic.retention.data.datasets[0].data = sortedRetAll.map(d => d.retention * 100);
+                charts.topic.retention.data.datasets[1].data = sortedRetAll.map(d => (retExMap[d.name] || 0) * 100);
+                charts.topic.retention.data.datasets[0].hidden = isEx && !isCompare;
+                charts.topic.retention.data.datasets[1].hidden = isAll && !isCompare;
                 charts.topic.retention.update();
             }
 
-            // Table - use sorted data
+            // Table
             let html = '';
             data.names.forEach((n, i) => {
                 const rawIdx = rawData.names.indexOf(n);
@@ -5777,62 +5802,70 @@
 
         function initTopicCharts() {
             charts.topic = {};
-            const sortedData = getSortedTopicData(topicAll);
+            const sortedAll = getSortedTopicData(topicAll);
+            const sortedEx = getSortedTopicData(topicEx);
 
             const donorsCtx = document.getElementById('topic-donorsChart').getContext('2d');
             charts.topic.donors = new Chart(donorsCtx, {
                 type: 'bar',
                 data: {
-                    labels: sortedData.names,
-                    datasets: [{ label: '月捐人数', data: sortedData.donors, backgroundColor: 'rgba(30, 58, 95, 0.8)', barPercentage: 0.7 }]
+                    labels: sortedAll.names,
+                    datasets: [
+                        { label: '全部数据', data: sortedAll.donors, backgroundColor: 'rgba(30, 58, 95, 0.8)', barPercentage: 0.8, borderRadius: 3,
+                          datalabels: { color: '#1e3a5f', align: 'end', anchor: 'end', offset: 4, formatter: v => formatNumber(v), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } },
+                        { label: '常规机构（剔出HHAX）', data: sortedEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.8)', barPercentage: 0.8, borderRadius: 3, hidden: true,
+                          datalabels: { color: '#e07b39', align: 'end', anchor: 'end', offset: 4, formatter: v => formatNumber(v), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
+                    ]
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false, indexAxis: 'y',
-                    plugins: {
-                        legend: { display: false },
-                        barDataLabels: { formatter: v => formatNumber(v), color: '#1e3a5f', offset: 6 }
-                    },
+                    layout: { padding: { right: 60 } },
+                    plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 8 } } },
                     scales: { x: { ticks: { callback: v => formatNumber(v) } } }
-                },
-                plugins: [barDataLabelsPlugin]
+                }
             });
 
             const amountCtx = document.getElementById('topic-amountChart').getContext('2d');
             charts.topic.amount = new Chart(amountCtx, {
                 type: 'bar',
                 data: {
-                    labels: sortedData.names,
-                    datasets: [{ label: '筹款额(万)', data: sortedData.amounts.map(a => a / 10000), backgroundColor: 'rgba(212, 168, 75, 0.8)', barPercentage: 0.7 }]
+                    labels: sortedAll.names,
+                    datasets: [
+                        { label: '全部数据', data: sortedAll.amounts.map(a => a / 10000), backgroundColor: 'rgba(212, 168, 75, 0.8)', barPercentage: 0.8, borderRadius: 3,
+                          datalabels: { color: '#b8942f', align: 'end', anchor: 'end', offset: 4, formatter: v => r2(v).toFixed(2) + '万', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } },
+                        { label: '常规机构（剔出HHAX）', data: sortedEx.amounts.map(a => a / 10000), backgroundColor: 'rgba(224, 123, 57, 0.65)', barPercentage: 0.8, borderRadius: 3, hidden: true,
+                          datalabels: { color: '#e07b39', align: 'end', anchor: 'end', offset: 4, formatter: v => r2(v).toFixed(2) + '万', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
+                    ]
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false, indexAxis: 'y',
-                    plugins: {
-                        legend: { display: false },
-                        barDataLabels: { formatter: v => r2(v >= 1000 ? v/10000 : v).toFixed(2) + '万', color: '#8a6a2a', offset: 6 }
-                    },
-                    scales: { x: { ticks: { callback: v => r2(v >= 1000 ? v/10000 : v).toFixed(2) + '万' } } }
-                },
-                plugins: [barDataLabelsPlugin]
+                    layout: { padding: { right: 60 } },
+                    plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 8 } } },
+                    scales: { x: { ticks: { callback: v => r2(v).toFixed(2) + '万' } } }
+                }
             });
 
             const retentionCtx = document.getElementById('topic-retentionChart').getContext('2d');
-            const sortedRetention = [...topicAll.names].map((n, i) => ({ name: n, retention: topicAll.retention[i] }))
+            const sortedRetAll = [...topicAll.names].map((n, i) => ({ name: n, retention: topicAll.retention[i] }))
+                .sort((a, b) => b.retention - a.retention);
+            const sortedRetEx = [...topicEx.names].map((n, i) => ({ name: n, retention: topicEx.retention[i] }))
                 .sort((a, b) => b.retention - a.retention);
             charts.topic.retention = new Chart(retentionCtx, {
                 type: 'bar',
                 data: {
-                    labels: sortedRetention.map(d => d.name),
-                    datasets: [{ label: '留存率', data: sortedRetention.map(d => d.retention * 100), backgroundColor: sortedRetention.map(d => d.retention > 0.5 ? 'rgba(224, 123, 57, 0.8)' : 'rgba(30, 58, 95, 0.8)'), barPercentage: 0.7 }]
+                    labels: sortedRetAll.map(d => d.name),
+                    datasets: [
+                        { label: '全部数据', data: sortedRetAll.map(d => d.retention * 100), backgroundColor: 'rgba(30, 58, 95, 0.8)', barPercentage: 0.8, borderRadius: 3,
+                          datalabels: { color: '#1e3a5f', align: 'end', anchor: 'end', offset: 4, formatter: v => r2(v).toFixed(2) + '%', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } },
+                        { label: '常规机构（剔出HHAX）', data: sortedRetEx.map(d => d.retention * 100), backgroundColor: 'rgba(224, 123, 57, 0.8)', barPercentage: 0.8, borderRadius: 3, hidden: true,
+                          datalabels: { color: '#e07b39', align: 'end', anchor: 'end', offset: 4, formatter: v => r2(v).toFixed(2) + '%', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
+                    ]
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false, indexAxis: 'y',
-                    plugins: {
-                        legend: { display: false },
-                        barDataLabels: { formatter: v => r2(v).toFixed(2) + '%', color: '#e07b39', offset: 6 }
-                    },
-                    scales: { x: { ticks: { callback: v => r2(v).toFixed(2) + '%' } } }
-                },
-                plugins: [barDataLabelsPlugin]
+                    plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 8 } } },
+                    scales: { x: { ticks: { callback: v => r2(v).toFixed(2) + '%' }, max: 100 } }
+                }
             });
 
             switchTopic('all');
