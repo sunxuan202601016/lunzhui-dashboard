@@ -1627,7 +1627,7 @@
                             <canvas id="overview-flowRecoveredChart"></canvas>
                         </div>
                         <div class="chart-legend">
-                            <div class="legend-item"><span class="legend-dot" style="background: rgba(45,90,74,0.85);"></span>基准值1全部数据</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: rgba(224,123,57,0.85);"></span>基准值1全部数据</div>
                             <div class="legend-item"><span class="legend-dot" style="background: rgba(35,70,54,0.75);"></span>基准值2常规机构</div>
                         </div>
                     </div>
@@ -3512,7 +3512,7 @@
                             { 
                                 label: '金额占比差异 (百分点)',
                                 data: diffData.map(d => d.amountDiff),
-                                backgroundColor: diffData.map(d => d.amountDiff >= 0 ? 'rgba(45,90,74,0.7)' : 'rgba(212,117,138,0.7)')
+                                backgroundColor: diffData.map(d => d.amountDiff >= 0 ? 'rgba(224,123,57,0.7)' : 'rgba(212,117,138,0.7)')
                             }
                         ]
                     },
@@ -3950,13 +3950,13 @@
                     data: {
                         labels: years,
                         datasets: [
-                            { label: '基准值1全部数据', data: allData.donors, backgroundColor: 'rgba(30,58,95,0.85)', borderRadius: 4, datalabels: { color: '#1e3a5f', align: (ctx) => ctx.dataIndex === ctx.dataset.data.length - 1 ? 'start' : 'end', anchor: 'end', offset: (ctx) => ctx.dataIndex === ctx.dataset.data.length - 1 ? -4 : 2 } },
-                            { label: '基准值2常规机构', data: exData.donors, backgroundColor: 'rgba(45,90,74,0.75)', borderRadius: 4, datalabels: { color: '#e07b39', align: (ctx) => ctx.dataIndex === ctx.dataset.data.length - 1 ? 'end' : 'start', anchor: 'end', offset: (ctx) => ctx.dataIndex === ctx.dataset.data.length - 1 ? -4 : 2 } }
+                            { label: '基准值1全部数据', data: allData.donors, backgroundColor: 'rgba(30,58,95,0.85)', borderRadius: 4, datalabels: { color: '#1e3a5f', align: (ctx) => ctx.dataIndex === ctx.dataset.data.length - 1 ? 'start' : 'end', anchor: 'end', offset: (ctx) => ctx.dataIndex === ctx.dataset.data.length - 1 ? 2 : 6 } },
+                            { label: '基准值2常规机构', data: exData.donors, backgroundColor: 'rgba(224,123,57,0.75)', borderRadius: 4, datalabels: { color: '#e07b39', align: (ctx) => ctx.dataIndex === ctx.dataset.data.length - 1 ? 'end' : 'start', anchor: 'end', offset: (ctx) => ctx.dataIndex === ctx.dataset.data.length - 1 ? 2 : 6 } }
                         ]
                     },
                     options: {
                         responsive: true, maintainAspectRatio: false,
-                        layout: { padding: { top: 20, right: 40, left: 10, bottom: 10 } },
+                        layout: { padding: { top: 50, right: 40, left: 10, bottom: 10 } },
                         onClick: chartClickHandler,
                         onHover: (e, elements, chart) => {
                             let hasTarget = elements.length > 0;
@@ -4017,7 +4017,7 @@
                     },
                     options: {
                         responsive: true, maintainAspectRatio: false,
-                        layout: { padding: { top: 24, right: 50, left: 10, bottom: 16 } },
+                        layout: { padding: { top: 50, right: 50, left: 10, bottom: 16 } },
                         onClick: chartClickHandler,
                         onHover: (e, elements, chart) => {
                             let hasTarget = elements.length > 0;
@@ -4067,14 +4067,14 @@
                         labels: years,
                         datasets: [
                             { label: '基准值1全部数据', data: allDataArr, backgroundColor: color1, borderRadius: 4,
-                              datalabels: { color: color1, align: 'end', anchor: 'end', offset: 2 } },
+                              datalabels: { color: color1, align: 'end', anchor: 'end', offset: 6 } },
                             { label: '基准值2常规机构', data: exDataArr, backgroundColor: color2, borderRadius: 4,
-                              datalabels: { color: color2, align: 'start', anchor: 'end', offset: 2 } }
+                              datalabels: { color: color2, align: 'start', anchor: 'end', offset: 6 } }
                         ]
                     },
                     options: {
                         responsive: true, maintainAspectRatio: false,
-                        layout: { padding: { top: 20, right: 40, left: 10, bottom: 10 } },
+                        layout: { padding: { top: 50, right: 40, left: 10, bottom: 10 } },
                         onClick: chartClickHandler,
                         onHover: (e, elements, chart) => {
                             let hasTarget = elements.length > 0;
@@ -4117,7 +4117,7 @@
                     },
                     options: {
                         responsive: true, maintainAspectRatio: false,
-                        layout: { padding: { top: 24, right: 50, left: 10, bottom: 16 } },
+                        layout: { padding: { top: 50, right: 50, left: 10, bottom: 16 } },
                         onClick: chartClickHandler,
                         onHover: (e, elements, chart) => {
                             let hasTarget = elements.length > 0;
@@ -4164,36 +4164,36 @@
             const fmtPct = v => r2(v).toFixed(1) + '%';
 
             // Payment Count (bar)
-            charts.overview.paymentCount = createOverviewBarChart('overview-paymentCountChart', allData.paymentCount, exData.paymentCount, fmtNum, 'rgba(30,58,95,0.85)', 'rgba(45,90,74,0.75)');
+            charts.overview.paymentCount = createOverviewBarChart('overview-paymentCountChart', allData.paymentCount, exData.paymentCount, fmtNum, 'rgba(30,58,95,0.85)', 'rgba(224,123,57,0.75)');
             // Org Count (bar)
-            charts.overview.orgs = createOverviewBarChart('overview-orgsChart', allData.orgs, exData.orgs, v => v, 'rgba(30,58,95,0.85)', 'rgba(45,90,74,0.75)');
+            charts.overview.orgs = createOverviewBarChart('overview-orgsChart', allData.orgs, exData.orgs, v => v, 'rgba(30,58,95,0.85)', 'rgba(224,123,57,0.75)');
             // New Donors (bar)
-            charts.overview.newDonors = createOverviewBarChart('overview-newDonorsChart', allData.newDonors, exData.newDonors, fmtNum, 'rgba(30,58,95,0.85)', 'rgba(45,90,74,0.75)');
+            charts.overview.newDonors = createOverviewBarChart('overview-newDonorsChart', allData.newDonors, exData.newDonors, fmtNum, 'rgba(30,58,95,0.85)', 'rgba(224,123,57,0.75)');
             // Net Growth (bar — may have negatives, don't beginAtZero)
-            charts.overview.netGrowth = createOverviewBarChart('overview-netGrowthChart', allData.netGrowth, exData.netGrowth, fmtNum, 'rgba(30,58,95,0.85)', 'rgba(45,90,74,0.75)');
+            charts.overview.netGrowth = createOverviewBarChart('overview-netGrowthChart', allData.netGrowth, exData.netGrowth, fmtNum, 'rgba(30,58,95,0.85)', 'rgba(224,123,57,0.75)');
             // Avg Pay (line)
-            charts.overview.avgPay = createOverviewBarChart('overview-avgPayChart', allData.avgPaymentAmount, exData.avgPaymentAmount, fmtMoneyLite, 'rgba(30,58,95,0.85)', 'rgba(45,90,74,0.75)');
+            charts.overview.avgPay = createOverviewBarChart('overview-avgPayChart', allData.avgPaymentAmount, exData.avgPaymentAmount, fmtMoneyLite, 'rgba(30,58,95,0.85)', 'rgba(224,123,57,0.75)');
             // Avg Total per Person (line)
-            charts.overview.avgTotal = createOverviewBarChart('overview-avgTotalChart', allData.avgTotalPayment, exData.avgTotalPayment, fmtMoneyLite, 'rgba(30,58,95,0.85)', 'rgba(45,90,74,0.75)');
+            charts.overview.avgTotal = createOverviewBarChart('overview-avgTotalChart', allData.avgTotalPayment, exData.avgTotalPayment, fmtMoneyLite, 'rgba(30,58,95,0.85)', 'rgba(224,123,57,0.75)');
             // Org Avg Amount (line)
-            charts.overview.orgAvg = createOverviewBarChart('overview-orgAvgChart', allData.orgAvgAmount, exData.orgAvgAmount, fmtMoneyLite, 'rgba(30,58,95,0.85)', 'rgba(45,90,74,0.75)');
+            charts.overview.orgAvg = createOverviewBarChart('overview-orgAvgChart', allData.orgAvgAmount, exData.orgAvgAmount, fmtMoneyLite, 'rgba(30,58,95,0.85)', 'rgba(224,123,57,0.75)');
             // Retention Rate (line, 0-100%)
-            charts.overview.retention = createOverviewBarChart('overview-retentionChart', allData.retentionRate.map(r => r2(r*100)), exData.retentionRate.map(r => r2(r*100)), fmtPct, 'rgba(30,58,95,0.85)', 'rgba(45,90,74,0.75)');
+            charts.overview.retention = createOverviewBarChart('overview-retentionChart', allData.retentionRate.map(r => r2(r*100)), exData.retentionRate.map(r => r2(r*100)), fmtPct, 'rgba(30,58,95,0.85)', 'rgba(224,123,57,0.75)');
 
             // Flow charts: 留存人数
-            charts.overview.flowRetained = createOverviewBarChart('overview-flowRetainedChart', allData.flowRetained, exData.flowRetained, fmtNum, 'rgba(30,58,95,0.85)', 'rgba(45,90,74,0.75)');
+            charts.overview.flowRetained = createOverviewBarChart('overview-flowRetainedChart', allData.flowRetained, exData.flowRetained, fmtNum, 'rgba(30,58,95,0.85)', 'rgba(224,123,57,0.75)');
             // Flow charts: 召回人数
-            charts.overview.flowRecalled = createOverviewBarChart('overview-flowRecalledChart', allData.flowRecalled, exData.flowRecalled, fmtNum, 'rgba(30,58,95,0.85)', 'rgba(45,90,74,0.75)');
+            charts.overview.flowRecalled = createOverviewBarChart('overview-flowRecalledChart', allData.flowRecalled, exData.flowRecalled, fmtNum, 'rgba(30,58,95,0.85)', 'rgba(224,123,57,0.75)');
             // Flow charts: 退捐人数
             charts.overview.flowCancelled = createOverviewBarChart('overview-flowCancelledChart', allData.flowCancelled, exData.flowCancelled, fmtNum, 'rgba(212,74,74,0.85)', 'rgba(180,60,60,0.75)');
             // Flow charts: 退捐挽回人数
-            charts.overview.flowRecovered = createOverviewBarChart('overview-flowRecoveredChart', allData.flowRecovered, exData.flowRecovered, fmtNum, 'rgba(45,90,74,0.85)', 'rgba(35,70,54,0.75)');
+            charts.overview.flowRecovered = createOverviewBarChart('overview-flowRecoveredChart', allData.flowRecovered, exData.flowRecovered, fmtNum, 'rgba(224,123,57,0.85)', 'rgba(35,70,54,0.75)');
             // 退捐率
             charts.overview.cancelRate = createOverviewBarChart('overview-cancelRateChart', allData.cancelRate.map(r => r2(r*100)), exData.cancelRate.map(r => r2(r*100)), fmtPct, 'rgba(212,74,74,0.85)', 'rgba(180,60,60,0.75)');
             // 流失率
             charts.overview.lossRate = createOverviewBarChart('overview-lossRateChart', allData.lossRate.map(r => r2(r*100)), exData.lossRate.map(r => r2(r*100)), fmtPct, 'rgba(212,74,74,0.85)', 'rgba(180,60,60,0.75)');
             // 在筹款机构数
-            charts.overview.fundraisingOrg = createOverviewBarChart('overview-fundraisingOrgChart', allData.fundraisingOrgCount, exData.fundraisingOrgCount, v => v, 'rgba(30,58,95,0.85)', 'rgba(45,90,74,0.75)');
+            charts.overview.fundraisingOrg = createOverviewBarChart('overview-fundraisingOrgChart', allData.fundraisingOrgCount, exData.fundraisingOrgCount, v => v, 'rgba(30,58,95,0.85)', 'rgba(224,123,57,0.75)');
 
             // Global year selector
             document.querySelectorAll('#global-year-selector .global-year-chip').forEach(chip => {
@@ -4805,7 +4805,7 @@
                 html = '<div style="margin-bottom:10px;"><strong style="color:var(--primary);">排除HHAX · 常规机构次年度留存率</strong></div>'
                     + '<p style="font-size:13px;line-height:1.8;color:var(--text-secondary);margin-bottom:10px;">排除 HHAX 后，2020–2024 年人数留存率稳定在 <strong>58.9%–64.2%</strong> 之间，未出现全部数据中 2023 年、2024 年的明显跃升。常规机构的新绑月捐人进入第二年后，留存能力相对稳定在六成左右。</p>'
                     + '<p style="font-size:13px;line-height:1.8;color:var(--text-secondary);margin-bottom:10px;">金额留存率虽然仍全部高于 100%，但 2022–2024 年基本稳定在 <strong>122% 左右</strong>，金额放大能力明显弱于全部数据。这说明常规机构的月捐增长更多依赖<strong>长期服务、稳定续捐和持续运营</strong>，而不是由少数头部机构带来的快速放大。</p>'
-                    + '<div style="margin:12px 0;padding:10px 14px;background:rgba(45,90,74,0.06);border-left:3px solid var(--primary);border-radius:0 6px 6px 0;"><div style="font-size:13px;line-height:1.8;color:var(--text-secondary);">📌 常规机构应重点关注留存的<strong>长期稳定性</strong>，而非追求单年的快速放大。关键抓手包括：优化首年捐赠人承接体验、建立定期沟通机制、识别流失高风险人群并前置干预。</div></div>';
+                    + '<div style="margin:12px 0;padding:10px 14px;background:rgba(224,123,57,0.06);border-left:3px solid var(--primary);border-radius:0 6px 6px 0;"><div style="font-size:13px;line-height:1.8;color:var(--text-secondary);">📌 常规机构应重点关注留存的<strong>长期稳定性</strong>，而非追求单年的快速放大。关键抓手包括：优化首年捐赠人承接体验、建立定期沟通机制、识别流失高风险人群并前置干预。</div></div>';
             } else {
                 html = '<div style="margin-bottom:10px;"><strong style="color:var(--primary);">全部数据 · 次年度留存率</strong></div>'
                     + '<p style="font-size:13px;line-height:1.8;color:var(--text-secondary);margin-bottom:10px;">2016–2024 年，人数留存率整体在 <strong>63.6%–77.8%</strong> 之间，说明月捐人进入第二年具有较强持续支持基础。<strong>2023 年是最突出年份</strong>：人数留存率 77.8%、金额留存率 217.2%，均处观察期高位——2023 年新绑月捐人不仅留存人数多，进入下一年后金额贡献也出现明显放大。</p>'
