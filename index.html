@@ -13,13 +13,14 @@
             --primary: #1e3a5f;
             --primary-light: #2d5a8a;
             --primary-dark: #152a45;
-            --secondary: #2d5a4a;
-            --secondary-light: #3d7a64;
+            --secondary: #e07b39;
+            --secondary-light: #f0a060;
             --accent: #d4a84b;
             --accent-light: #e8c47a;
             --danger: #c54b4b;
             --warning: #d4854b;
             --purple: #6b5b95;
+            --positive: #e07b39;
             --pink: #d4758a;
             
             /* Background Colors */
@@ -69,7 +70,7 @@
 
         /* ===== HEADER ===== */
         .report-header {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-dark) 100%);
             color: white;
             padding: 0;
             position: relative;
@@ -81,7 +82,7 @@
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(45, 90, 74, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(224, 123, 57, 0.4) 0%, transparent 40%),
                 radial-gradient(circle at 80% 20%, rgba(212, 168, 75, 0.2) 0%, transparent 35%),
                 radial-gradient(circle at 60% 60%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
         }
@@ -180,7 +181,7 @@
         .nav-brand-icon {
             width: 32px;
             height: 32px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -385,7 +386,7 @@
         .module-title-num {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -426,7 +427,7 @@
             content: '';
             width: 4px;
             height: 20px;
-            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
             border-radius: 2px;
         }
         .section-badge {
@@ -515,7 +516,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
         }
 
         .kpi-card:hover {
@@ -523,7 +524,7 @@
             box-shadow: var(--shadow-lg);
         }
 
-        .kpi-card.green::before { background: linear-gradient(90deg, var(--secondary) 0%, #4ade80 100%); }
+        .kpi-card.green::before { background: linear-gradient(90deg, var(--positive) 0%, #4ade80 100%); }
         .kpi-card.orange::before { background: linear-gradient(90deg, var(--accent) 0%, var(--warning) 100%); }
         .kpi-card.purple::before { background: linear-gradient(90deg, var(--purple) 0%, #a78bfa 100%); }
         .kpi-card.pink::before { background: linear-gradient(90deg, var(--pink) 0%, #f472b6 100%); }
@@ -626,12 +627,12 @@
             font-weight: 600;
             white-space: nowrap;
         }
-        .kpi-yoy-pill .yoy-val.positive { color: var(--secondary); }
+        .kpi-yoy-pill .yoy-val.positive { color: var(--positive); }
         .kpi-yoy-pill .yoy-val.negative { color: var(--danger); }
         .kpi-yoy-pill .yoy-val.zero { color: var(--text-muted); }
 
         /* Shared diff color classes */
-        .kpi-diff-val.positive { color: var(--secondary); }
+        .kpi-diff-val.positive { color: var(--positive); }
         .kpi-diff-val.negative { color: var(--danger); }
         .kpi-diff-val.zero { color: var(--text-muted); }
 
@@ -766,8 +767,8 @@
 
         /* ===== INSIGHT BOX ===== */
         .insight-box {
-            background: linear-gradient(135deg, rgba(30, 58, 95, 0.03) 0%, rgba(45, 90, 74, 0.05) 100%);
-            border: 1px solid rgba(45, 90, 74, 0.15);
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.03) 0%, rgba(224, 123, 57, 0.05) 100%);
+            border: 1px solid rgba(224, 123, 57, 0.15);
             border-left: 4px solid var(--secondary);
             border-radius: var(--radius-md);
             padding: 20px 24px;
@@ -839,7 +840,7 @@
         }
 
         .data-table th.green {
-            background: rgba(45, 90, 74, 0.08);
+            background: rgba(224, 123, 57, 0.08);
             color: var(--secondary);
         }
 
@@ -859,7 +860,7 @@
             border-radius: 4px;
         }
 
-        .positive { color: var(--secondary); font-weight: 600; }
+        .positive { color: var(--positive); font-weight: 600; }
         .negative { color: var(--danger); font-weight: 600; }
 
         /* ===== LEGEND ===== */
@@ -901,7 +902,7 @@
             font-weight: 600;
         }
 
-        .metric-compare-value.up { color: var(--secondary); }
+        .metric-compare-value.up { color: var(--positive); }
         .metric-compare-value.down { color: var(--danger); }
 
         /* ===== FOOTER ===== */
@@ -961,7 +962,7 @@
 
         /* ===== SPECIAL STYLES ===== */
         .gradient-text {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -978,7 +979,7 @@
         }
 
         .status-badge.success {
-            background: rgba(45, 90, 74, 0.1);
+            background: rgba(224, 123, 57, 0.1);
             color: var(--secondary);
         }
 
@@ -1028,8 +1029,8 @@
             font-size: 11px;
             padding: 2px 8px;
             border-radius: 4px;
-            background: rgba(45, 90, 74, 0.12);
-            color: #2d5a4a;
+            background: rgba(224, 123, 57, 0.12);
+            color: #e07b39;
             font-weight: 600;
         }
         .badge-blue {
@@ -1051,7 +1052,7 @@
             font-weight: 600;
         }
 
-        .positive { color: #2d5a4a; font-weight: 600; }
+        .positive { color: var(--positive); font-weight: 600; }
         .negative { color: #c83c3c; font-weight: 600; }
 
         .feature-table td { font-size: 13px; }
@@ -1069,7 +1070,7 @@
             font-weight: 600;
         }
         .overview-year-table th.group-ex {
-            background: rgba(45, 90, 74, 0.08);
+            background: rgba(224, 123, 57, 0.08);
             color: var(--secondary);
             text-align: center;
             font-weight: 600;
@@ -1108,7 +1109,7 @@
             font-weight: 600;
         }
         .retention-table-wrap .data-table th.group-ex {
-            background: rgba(45, 90, 74, 0.08);
+            background: rgba(224, 123, 57, 0.08);
             color: var(--secondary);
             text-align: center;
             font-weight: 600;
@@ -1231,7 +1232,7 @@
             color: var(--primary);
         }
         .year-popup-metric-value.orange { color: var(--accent); }
-        .year-popup-metric-value.green { color: var(--secondary); }
+        .year-popup-metric-value.green { color: var(--positive); }
 
         .year-popup-section-title {
             font-size: 14px;
@@ -1435,7 +1436,7 @@
                         </div>
                         <div class="chart-legend">
                             <div class="legend-item"><span class="legend-dot" style="background: #1e3a5f;"></span>基准值1全部数据</div>
-                            <div class="legend-item"><span class="legend-dot" style="background: #2d5a4a;"></span>基准值2常规机构</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #e07b39;"></span>基准值2常规机构</div>
                         </div>
                     </div>
                     <!-- 3. 平均单笔捐赠额 -->
@@ -1451,7 +1452,7 @@
                         </div>
                         <div class="chart-legend">
                             <div class="legend-item"><span class="legend-dot" style="background: #1e3a5f;"></span>基准值1全部数据</div>
-                            <div class="legend-item"><span class="legend-dot" style="background: #2d5a4a;"></span>基准值2常规机构</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #e07b39;"></span>基准值2常规机构</div>
                         </div>
                     </div>
                     <!-- 4. 平均单人捐赠额 -->
@@ -1467,7 +1468,7 @@
                         </div>
                         <div class="chart-legend">
                             <div class="legend-item"><span class="legend-dot" style="background: #1e3a5f;"></span>基准值1全部数据</div>
-                            <div class="legend-item"><span class="legend-dot" style="background: #2d5a4a;"></span>基准值2常规机构</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #e07b39;"></span>基准值2常规机构</div>
                         </div>
                     </div>
                     <!-- 5. 机构总数 -->
@@ -1483,7 +1484,7 @@
                         </div>
                         <div class="chart-legend">
                             <div class="legend-item"><span class="legend-dot" style="background: #1e3a5f;"></span>基准值1全部数据</div>
-                            <div class="legend-item"><span class="legend-dot" style="background: #2d5a4a;"></span>基准值2常规机构</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #e07b39;"></span>基准值2常规机构</div>
                         </div>
                     </div>
                     <!-- 6. 在筹款机构数 -->
@@ -1499,7 +1500,7 @@
                         </div>
                         <div class="chart-legend">
                             <div class="legend-item"><span class="legend-dot" style="background: #1e3a5f;"></span>基准值1全部数据</div>
-                            <div class="legend-item"><span class="legend-dot" style="background: #2d5a4a;"></span>基准值2常规机构</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #e07b39;"></span>基准值2常规机构</div>
                         </div>
                     </div>
                     <!-- 7. 平均机构筹款额 -->
@@ -1515,7 +1516,7 @@
                         </div>
                         <div class="chart-legend">
                             <div class="legend-item"><span class="legend-dot" style="background: #1e3a5f;"></span>基准值1全部数据</div>
-                            <div class="legend-item"><span class="legend-dot" style="background: #2d5a4a;"></span>基准值2常规机构</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #e07b39;"></span>基准值2常规机构</div>
                         </div>
                     </div>
                     <!-- 8. 累计月捐人数 -->
@@ -1531,7 +1532,7 @@
                         </div>
                         <div class="chart-legend">
                             <div class="legend-item"><span class="legend-dot" style="background: #1e3a5f;"></span>基准值1全部数据</div>
-                            <div class="legend-item"><span class="legend-dot" style="background: #2d5a4a;"></span>基准值2常规机构</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #e07b39;"></span>基准值2常规机构</div>
                         </div>
                     </div>
                     <!-- 9. 留存人数 -->
@@ -1547,7 +1548,7 @@
                         </div>
                         <div class="chart-legend">
                             <div class="legend-item"><span class="legend-dot" style="background: #1e3a5f;"></span>基准值1全部数据</div>
-                            <div class="legend-item"><span class="legend-dot" style="background: #2d5a4a;"></span>基准值2常规机构</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #e07b39;"></span>基准值2常规机构</div>
                         </div>
                     </div>
                     <!-- 10. 新增人数 -->
@@ -1563,7 +1564,7 @@
                         </div>
                         <div class="chart-legend">
                             <div class="legend-item"><span class="legend-dot" style="background: #1e3a5f;"></span>基准值1全部数据</div>
-                            <div class="legend-item"><span class="legend-dot" style="background: #2d5a4a;"></span>基准值2常规机构</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #e07b39;"></span>基准值2常规机构</div>
                         </div>
                     </div>
                     <!-- 11. 净增长人数 -->
@@ -1579,7 +1580,7 @@
                         </div>
                         <div class="chart-legend">
                             <div class="legend-item"><span class="legend-dot" style="background: #1e3a5f;"></span>基准值1全部数据</div>
-                            <div class="legend-item"><span class="legend-dot" style="background: #2d5a4a;"></span>基准值2常规机构</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #e07b39;"></span>基准值2常规机构</div>
                         </div>
                     </div>
                     <!-- 12. 召回人数 -->
@@ -1595,7 +1596,7 @@
                         </div>
                         <div class="chart-legend">
                             <div class="legend-item"><span class="legend-dot" style="background: #1e3a5f;"></span>基准值1全部数据</div>
-                            <div class="legend-item"><span class="legend-dot" style="background: #2d5a4a;"></span>基准值2常规机构</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #e07b39;"></span>基准值2常规机构</div>
                         </div>
                     </div>
                     <!-- 13. 退捐人数 -->
@@ -1675,7 +1676,7 @@
                         </div>
                         <div class="chart-legend">
                             <div class="legend-item"><span class="legend-dot" style="background: #1e3a5f;"></span>基准值1全部数据</div>
-                            <div class="legend-item"><span class="legend-dot" style="background: #2d5a4a;"></span>基准值2常规机构</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #e07b39;"></span>基准值2常规机构</div>
                         </div>
                     </div>
                 </div>
@@ -2898,7 +2899,7 @@
             }
         };
         const tierAllYearlyColors = {
-            '(0-10)': '#90caf9', '[10-20)': '#5b7fa5', '[20-30)': '#1e3a5f', '[30-60)': '#2d5a4a',
+            '(0-10)': '#90caf9', '[10-20)': '#5b7fa5', '[20-30)': '#1e3a5f', '[30-60)': '#e07b39',
             '[60-100)': '#7ba892', '[100-200)': '#8b6914', '[200-500]': '#c44e3d', '(500-∞)': '#d4758a',
         };
         const tierExYearlyColors = {
@@ -3401,7 +3402,7 @@
                         const diffStr = diff > 0 ? '(+' + r2(diff).toFixed(1) + (f.key.includes('Rate') ? 'pp' : '') + ')' 
                             : diff < 0 ? '(' + r2(diff).toFixed(1) + (f.key.includes('Rate') ? 'pp' : '') + ')'
                             : '';
-                        const diffCls = diff > 0.005 ? ' style="color:var(--secondary);font-size:11px"'
+                        const diffCls = diff > 0.005 ? ' style="color:var(--positive);font-size:11px"'
                             : diff < -0.005 ? ' style="color:var(--danger);font-size:11px"'
                             : ' style="color:var(--text-muted);font-size:11px"';
                         tbody += '<td class="group-all">' + f.fmt(vAll) + '</td>';
@@ -3547,7 +3548,7 @@
                         labels: trendLabels,
                         datasets: [
                             { label: '基准值1全部数据', data: trendAll, borderColor: '#1e3a5f', borderWidth: 2, tension: 0.3, fill: true, backgroundColor: 'rgba(30,58,95,0.1)' },
-                            { label: '基准值2常规机构', data: trendEx, borderColor: '#2d5a4a', borderWidth: 2, borderDash: [5,5], tension: 0.3 }
+                            { label: '基准值2常规机构', data: trendEx, borderColor: '#e07b39', borderWidth: 2, borderDash: [5,5], tension: 0.3 }
                         ]
                     },
                     options: {
@@ -3851,11 +3852,11 @@
                 <div class="year-popup-section-title">同比增长</div>
                 <div class="year-popup-row">
                     <span class="year-popup-row-label">人数增长</span>
-                    <span class="year-popup-row-value" style="color: ${donorsGrowth >= 0 ? 'var(--secondary)' : 'var(--danger)'};">${donorsGrowth >= 0 ? '↑' : '↓'} ${r2(Math.abs(donorsGrowth)).toFixed(2)}%</span>
+                    <span class="year-popup-row-value" style="color: ${donorsGrowth >= 0 ? 'var(--positive)' : 'var(--danger)'};">${donorsGrowth >= 0 ? '↑' : '↓'} ${r2(Math.abs(donorsGrowth)).toFixed(2)}%</span>
                 </div>
                 <div class="year-popup-row">
                     <span class="year-popup-row-label">筹款增长</span>
-                    <span class="year-popup-row-value" style="color: ${amountGrowth >= 0 ? 'var(--secondary)' : 'var(--danger)'};">${amountGrowth >= 0 ? '↑' : '↓'} ${r2(Math.abs(amountGrowth)).toFixed(2)}%</span>
+                    <span class="year-popup-row-value" style="color: ${amountGrowth >= 0 ? 'var(--positive)' : 'var(--danger)'};">${amountGrowth >= 0 ? '↑' : '↓'} ${r2(Math.abs(amountGrowth)).toFixed(2)}%</span>
                 </div>
                 ` : ''}
 
@@ -3950,7 +3951,7 @@
                         labels: years,
                         datasets: [
                             { label: '基准值1全部数据', data: allData.donors, backgroundColor: 'rgba(30,58,95,0.85)', borderRadius: 4, datalabels: { color: '#1e3a5f', align: (ctx) => ctx.dataIndex === ctx.dataset.data.length - 1 ? 'start' : 'end', anchor: 'end', offset: (ctx) => ctx.dataIndex === ctx.dataset.data.length - 1 ? -4 : 2 } },
-                            { label: '基准值2常规机构', data: exData.donors, backgroundColor: 'rgba(45,90,74,0.75)', borderRadius: 4, datalabels: { color: '#2d5a4a', align: (ctx) => ctx.dataIndex === ctx.dataset.data.length - 1 ? 'end' : 'start', anchor: 'end', offset: (ctx) => ctx.dataIndex === ctx.dataset.data.length - 1 ? -4 : 2 } }
+                            { label: '基准值2常规机构', data: exData.donors, backgroundColor: 'rgba(45,90,74,0.75)', borderRadius: 4, datalabels: { color: '#e07b39', align: (ctx) => ctx.dataIndex === ctx.dataset.data.length - 1 ? 'end' : 'start', anchor: 'end', offset: (ctx) => ctx.dataIndex === ctx.dataset.data.length - 1 ? -4 : 2 } }
                         ]
                     },
                     options: {
@@ -4482,7 +4483,7 @@
         // ===== 自然年筹款表现 =====
         function initNaturalYearCharts() {
             charts.naturalYear = {};
-            const barColors = { all: '#1e3a5f', ex: '#2d5a4a' };
+            const barColors = { all: '#1e3a5f', ex: '#e07b39' };
 
             function makeBarChart(canvasId, metric) {
                 const ctx = document.getElementById(canvasId).getContext('2d');
@@ -4597,7 +4598,7 @@
             const ctx3 = document.getElementById('nyr-gap-chart');
             if (!ctx1 || !ctx2 || !ctx3) return;
 
-            const lineColors = { all: '#1e3a5f', ex: '#2d5a4a' };
+            const lineColors = { all: '#1e3a5f', ex: '#e07b39' };
 
             function makeLineChart(ctx, metric, ySuffix) {
                 const srcAll = metric === 'peopleRetention' ? nyrAll.peopleRetention : nyrAll.amountRetention;
@@ -4759,7 +4760,7 @@
 
             const cards = [
                 { label: (allYears ? '人数留存率峰值' : '人数留存率'), value: peakPRet.toFixed(1) + '%', sub: peakYear + '年', color: '#1e3a5f' },
-                { label: (allYears ? '金额留存率峰值' : '金额留存率'), value: peakARet.toFixed(1) + '%', sub: peakYear + '年', color: '#2d5a4a' },
+                { label: (allYears ? '金额留存率峰值' : '金额留存率'), value: peakARet.toFixed(1) + '%', sub: peakYear + '年', color: '#e07b39' },
                 { label: '新绑月捐人数', value: (allYears ? src.newPeople[src.newPeople.length - 1].toLocaleString() : src.newPeople[idx].toLocaleString()), sub: (allYears ? '2024年' : peakYear + '年'), color: '#8b6914' },
                 { label: '次年仍在绑人数', value: (allYears ? src.retainedPeople[src.retainedPeople.length - 1].toLocaleString() : src.retainedPeople[idx].toLocaleString()), sub: (allYears ? '2024年新绑→2025年' : peakYear + '年新绑→' + (peakYear + 1) + '年'), color: '#c44e3d' }
             ];
@@ -4792,7 +4793,7 @@
                 html = '<div style="margin-bottom:10px;"><strong style="color:var(--primary);">' + selYear + ' 年 · 次年度留存率详情</strong></div>'
                     + '<p style="font-size:13px;line-height:1.8;color:var(--text-secondary);margin-bottom:10px;">' + selYear + ' 年新绑月捐人：全部数据 <strong>' + aNew + ' 人</strong>，剔出HHAX后常规机构 <strong>' + eNew + ' 人</strong>。进入次年后仍在绑人数：全部数据 <strong>' + aRet + ' 人</strong>，常规机构 <strong>' + eRet + ' 人</strong>。</p>'
                     + '<p style="font-size:13px;line-height:1.8;color:var(--text-secondary);margin-bottom:10px;"><strong style="color:#1e3a5f;">基准值1全部数据</strong>：人数留存率 <strong>' + aPRet.toFixed(1) + '%</strong>，金额留存率 <strong>' + aARet.toFixed(1) + '%</strong>。</p>'
-                    + '<p style="font-size:13px;line-height:1.8;color:var(--text-secondary);margin-bottom:10px;"><strong style="color:#2d5a4a;">基准值2常规机构</strong>：人数留存率 <strong>' + ePRet.toFixed(1) + '%</strong>，金额留存率 <strong>' + eARet.toFixed(1) + '%</strong>。</p>';
+                    + '<p style="font-size:13px;line-height:1.8;color:var(--text-secondary);margin-bottom:10px;"><strong style="color:#e07b39;">基准值2常规机构</strong>：人数留存率 <strong>' + ePRet.toFixed(1) + '%</strong>，金额留存率 <strong>' + eARet.toFixed(1) + '%</strong>。</p>';
 
                 if (gPRet > 1 || gARet > 1) {
                     html += '<div style="margin:12px 0;padding:10px 14px;background:rgba(196,75,75,0.06);border-left:3px solid #c44e3d;border-radius:0 6px 6px 0;"><div style="font-size:13px;line-height:1.8;color:var(--text-secondary);">📌 该年 HHAX 影响显著：人数留存率差距 <strong>' + gPRet.toFixed(1) + 'pp</strong>，金额留存率差距 <strong>' + gARet.toFixed(1) + 'pp</strong>。两组数据口径在该年存在明显分化。</div></div>';
@@ -4850,8 +4851,8 @@
         }
 
         function updateTierDistChart() {
-            const distColors = ['#1e3a5f', '#2d5a4a', '#8b6914', '#c44e3d', '#5b7fa5', '#7ba892', '#c49b3d', '#d4758a'];
-            const distColorsEx = ['#2d5a4a', '#3d7a64', '#5b8a6a', '#7ba892', '#3d6a5a', '#5a8a7a', '#6b9b8a', '#4a7a6a'];
+            const distColors = ['#1e3a5f', '#e07b39', '#8b6914', '#c44e3d', '#5b7fa5', '#7ba892', '#c49b3d', '#d4758a'];
+            const distColorsEx = ['#e07b39', '#f0a060', '#5b8a6a', '#7ba892', '#3d6a5a', '#5a8a7a', '#6b9b8a', '#4a7a6a'];
 
             const ch = charts.tier.dist;
             if (!ch) return;
@@ -4937,7 +4938,7 @@
                     {
                         label: '常规机构',
                         data: allItems.map(item => r2(item.exRate * 100)),
-                        backgroundColor: 'rgba(45, 90, 74, 0.8)',
+                        backgroundColor: 'rgba(224, 123, 57, 0.8)',
                         borderRadius: 4,
                         barPercentage: 0.7
                     }
@@ -4947,7 +4948,7 @@
             } else {
                 const data = tierRetentionScope === 'all' ? tierAll : tierEx;
                 const rates = tierRetentionScope === 'all' ? allRates : exRates;
-                const color = tierRetentionScope === 'all' ? 'rgba(30, 58, 95, 0.8)' : 'rgba(45, 90, 74, 0.8)';
+                const color = tierRetentionScope === 'all' ? 'rgba(30, 58, 95, 0.8)' : 'rgba(224, 123, 57, 0.8)';
 
                 ch.data.datasets = [{
                     label: tierRetentionScope === 'all' ? '全部数据' : '常规机构数据',
@@ -5106,7 +5107,7 @@
                     labels: tierAll.tiers,
                     datasets: [
                         { label: '全部数据', data: tierAll.donors, backgroundColor: 'rgba(30, 58, 95, 0.8)' },
-                        { label: '常规机构的数据', data: tierEx.donors, backgroundColor: 'rgba(45, 90, 74, 0.7)' }
+                        { label: '常规机构的数据', data: tierEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.7)' }
                     ]
                 },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { ticks: { callback: v => formatNumber(v) } } } }
@@ -5119,7 +5120,7 @@
                     labels: tierAll.tiers,
                     datasets: [
                         { label: '全部数据', data: tierAll.amount, backgroundColor: 'rgba(30, 58, 95, 0.8)' },
-                        { label: '常规机构的数据', data: tierEx.amount, backgroundColor: 'rgba(45, 90, 74, 0.7)' }
+                        { label: '常规机构的数据', data: tierEx.amount, backgroundColor: 'rgba(224, 123, 57, 0.7)' }
                     ]
                 },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { ticks: { callback: v => r2(v / 10000).toFixed(2) + '万' } } } }
@@ -5127,7 +5128,7 @@
 
             // Doughnut chart for tier distribution (scope-aware: all / ex / compare)
             const distCtx = document.getElementById('tier-distChart').getContext('2d');
-            const distColors = ['#1e3a5f', '#2d5a4a', '#8b6914', '#c44e3d', '#5b7fa5', '#7ba892', '#c49b3d', '#d4758a'];
+            const distColors = ['#1e3a5f', '#e07b39', '#8b6914', '#c44e3d', '#5b7fa5', '#7ba892', '#c49b3d', '#d4758a'];
             charts.tier.dist = new Chart(distCtx, {
                 type: 'doughnut',
                 data: {
@@ -5547,7 +5548,7 @@
                 <strong style="color:var(--primary);">基金会是月捐市场主力，但头部机构 HHAX 影响非常明显。</strong>全部数据中基金会贡献了 ${aFDshare}% 的筹款金额和 ${aFDdonor}% 的月捐人数，留存率达到 ${aFDret}%。但<span class="insight-highlight">剔除 HHAX 后</span>，基金会金额占比降至 ${eFDshare}%，人数占比降至 ${eFDdonor}%，留存率从 ${aFDret}% 骤降至 ${eFDret}%，说明全部数据中的基金会表现受到旗舰机构显著拉动。
                 </p>
                 <p style="font-size:13px;line-height:1.8;color:var(--text-secondary);margin-bottom:10px;">
-                <strong style="color:var(--secondary);">社会服务机构是常规机构的重要参照类型。</strong>在全部数据中金额仅占 ${aSHamount}%，但剔除 HHAX 后金额占比提升至 ${eSHamount}%、人数占比提升至 ${eSHdonor}%，留存率 ${(orgEx.retention[1]*100).toFixed(0)}% 略高于剔除 HHAX 后基金会的 ${eFDret}%。一线服务型机构并非天然留存弱，若能强化项目表达和持续服务机制，仍具较大增长潜力。
+                <strong style="color:var(--positive);">社会服务机构是常规机构的重要参照类型。</strong>在全部数据中金额仅占 ${aSHamount}%，但剔除 HHAX 后金额占比提升至 ${eSHamount}%、人数占比提升至 ${eSHdonor}%，留存率 ${(orgEx.retention[1]*100).toFixed(0)}% 略高于剔除 HHAX 后基金会的 ${eFDret}%。一线服务型机构并非天然留存弱，若能强化项目表达和持续服务机制，仍具较大增长潜力。
                 </p>
                 <p style="font-size:13px;line-height:1.8;color:var(--text-secondary);margin-bottom:10px;">
                 <strong style="color:var(--purple);">红十字会呈现"低金额、大人数"的参与型结构。</strong>仅有 2 家机构、4 个项目，但月捐人数达 ${formatNumber(orgAll.donors[3])} 人。平均单次支付金额仅 ¥${hszAvgPay} 元，明显低于其他类型。专项基金/专项项目虽规模不大（19家机构），但留存率 ${(orgEx.retention[5]*100).toFixed(0)}% 表现较好，显示较高的人均价值潜力。
@@ -5589,7 +5590,7 @@
                     labels: orgAll.names,
                     datasets: [
                         { label: '全部数据', data: orgAll.retention.map(r => r * 100), backgroundColor: 'rgba(30, 58, 95, 0.8)', borderRadius: 4, datalabels: { color: '#1e3a5f', align: 'end', anchor: 'end', offset: 2, formatter: v => v.toFixed(0) + '%', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } },
-                        { label: '常规机构（剔出HHAX）', data: orgEx.retention.map(r => r * 100), backgroundColor: 'rgba(45, 90, 74, 0.8)', borderRadius: 4, hidden: true, datalabels: { color: '#2d5a4a', align: 'start', anchor: 'end', offset: 2, formatter: v => v.toFixed(0) + '%', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
+                        { label: '常规机构（剔出HHAX）', data: orgEx.retention.map(r => r * 100), backgroundColor: 'rgba(224, 123, 57, 0.8)', borderRadius: 4, hidden: true, datalabels: { color: '#e07b39', align: 'start', anchor: 'end', offset: 2, formatter: v => v.toFixed(0) + '%', font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
                     ]
                 },
                 options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 50 } }, plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 8 } } }, scales: { x: { ticks: { callback: v => v.toFixed(0) + '%' }, max: 100, title: { display: true, text: '留存率' } } } }
@@ -5797,13 +5798,13 @@
                 type: 'bar',
                 data: {
                     labels: sortedRetention.map(d => d.name),
-                    datasets: [{ label: '留存率', data: sortedRetention.map(d => d.retention * 100), backgroundColor: sortedRetention.map(d => d.retention > 0.5 ? 'rgba(45, 90, 74, 0.8)' : 'rgba(30, 58, 95, 0.8)'), barPercentage: 0.7 }]
+                    datasets: [{ label: '留存率', data: sortedRetention.map(d => d.retention * 100), backgroundColor: sortedRetention.map(d => d.retention > 0.5 ? 'rgba(224, 123, 57, 0.8)' : 'rgba(30, 58, 95, 0.8)'), barPercentage: 0.7 }]
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false, indexAxis: 'y',
                     plugins: {
                         legend: { display: false },
-                        barDataLabels: { formatter: v => r2(v).toFixed(2) + '%', color: '#2d5a4a', offset: 6 }
+                        barDataLabels: { formatter: v => r2(v).toFixed(2) + '%', color: '#e07b39', offset: 6 }
                     },
                     scales: { x: { ticks: { callback: v => r2(v).toFixed(2) + '%' } } }
                 },
@@ -5863,7 +5864,7 @@
                     labels: hourLabels,
                     datasets: [
                         { label: '全部数据', data: bindAll.donors, backgroundColor: 'rgba(30, 58, 95, 0.8)', borderRadius: 2 },
-                        { label: '常规机构的数据', data: bindEx.donors, backgroundColor: 'rgba(45, 90, 74, 0.7)', borderRadius: 2 }
+                        { label: '常规机构的数据', data: bindEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.7)', borderRadius: 2 }
                     ]
                 },
                 options: {
@@ -5905,7 +5906,7 @@
                     labels: cancelLabels,
                     datasets: [
                         { label: '全部数据', data: cancelAll.donors, backgroundColor: 'rgba(30, 58, 95, 0.8)', borderRadius: 2 },
-                        { label: '常规机构的数据', data: cancelEx.donors, backgroundColor: 'rgba(45, 90, 74, 0.7)', borderRadius: 2 }
+                        { label: '常规机构的数据', data: cancelEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.7)', borderRadius: 2 }
                     ]
                 },
                 options: {
@@ -5943,7 +5944,7 @@
                 type: 'doughnut',
                 data: {
                     labels: reasonAll.reasons,
-                    datasets: [{ data: reasonAll.counts, backgroundColor: ['#6b5b95', '#d4a84b', '#d4758a', '#2d5a4a', '#1e3a5f', '#4ade80'], borderWidth: 0 }]
+                    datasets: [{ data: reasonAll.counts, backgroundColor: ['#6b5b95', '#d4a84b', '#d4758a', '#e07b39', '#1e3a5f', '#4ade80'], borderWidth: 0 }]
                 },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
             });
@@ -5953,7 +5954,7 @@
                 type: 'doughnut',
                 data: {
                     labels: reasonAll.reasons,
-                    datasets: [{ data: reasonAll.amounts, backgroundColor: ['#6b5b95', '#d4a84b', '#d4758a', '#2d5a4a', '#1e3a5f', '#4ade80'], borderWidth: 0 }]
+                    datasets: [{ data: reasonAll.amounts, backgroundColor: ['#6b5b95', '#d4a84b', '#d4758a', '#e07b39', '#1e3a5f', '#4ade80'], borderWidth: 0 }]
                 },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
             });
@@ -6039,7 +6040,7 @@
                     labels: names,
                     datasets: [
                         { label: '启动该功能', data: featureData.map(f => +(f.on.retention * 100).toFixed(1)), backgroundColor: 'rgba(30, 58, 95, 0.8)', borderRadius: 4 },
-                        { label: '未启动该功能', data: featureData.map(f => +(f.off.retention * 100).toFixed(1)), backgroundColor: 'rgba(45, 90, 74, 0.6)', borderRadius: 4 }
+                        { label: '未启动该功能', data: featureData.map(f => +(f.off.retention * 100).toFixed(1)), backgroundColor: 'rgba(224, 123, 57, 0.6)', borderRadius: 4 }
                     ]
                 },
                 options: {
