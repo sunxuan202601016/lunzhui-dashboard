@@ -3791,7 +3791,7 @@
                         responsive: true, maintainAspectRatio: false,
                         layout: { padding: { top: 20, bottom: 20, left: 10, right: 10 } },
                         plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + r2(ctx.parsed.y).toFixed(2) + '%' } } },
-                        scales: { y: { ticks: { callback: v => v + '%' } } }
+                        scales: { y: { grace: '15%', ticks: { callback: v => v + '%' } } }
                     }
                 });
             }
@@ -4217,7 +4217,7 @@
                                 clip: false
                             }
                         },
-                        scales: { y: { beginAtZero: true, ticks: { callback: v => formatNumber(v) } } }
+                        scales: { y: { beginAtZero: true, grace: '15%', ticks: { callback: v => formatNumber(v) } } }
                     }
                 });
 
@@ -4278,7 +4278,7 @@
                                 clip: false
                             }
                         },
-                        scales: { y: { ticks: { callback: v => formatMoney(v) } } }
+                        scales: { y: { ticks: { callback: v => formatMoney(v) }, grace: '15%' } }
                     }
                 });
 
@@ -4330,7 +4330,7 @@
                             legend: { display: false },
                             datalabels: { display: (ctx) => shouldShowBarLabel(ctx), formatter: v => fmtFn(v), font: { size: 10, family: "'Noto Sans SC', sans-serif", weight: '600' }, clip: false }
                         },
-                        scales: { y: { beginAtZero: true, ticks: { callback: v => fmtFn(v) } } }
+                        scales: { y: { beginAtZero: true, grace: '15%', ticks: { callback: v => fmtFn(v) } } }
                     }
                 });
                 addLegendToggle(canvas, chart);
@@ -4758,7 +4758,7 @@
                         },
                         scales: {
                             x: { grid: { display: false }, ticks: { font: { size: 10 } } },
-                            y: { ticks: { font: { size: 10 }, callback: function(v) {
+                            y: { grace: '20%', ticks: { font: { size: 10 }, callback: function(v) {
                                 if (metric === 'orgs') return v;
                                 if (v >= 1e8) return (v/1e8).toFixed(1) + '亿';
                                 if (v >= 1e4) return (v/1e4).toFixed(1) + '万';
@@ -4909,7 +4909,7 @@
                     },
                     scales: {
                         x: { grid: { display: false }, ticks: { font: { size: 10 } } },
-                        y: { ticks: { font: { size: 10 }, callback: v => v + 'pp' } }
+                        y: { grace: '20%', ticks: { font: { size: 10 }, callback: v => v + 'pp' } }
                     }
                 }
             });
