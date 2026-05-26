@@ -3309,9 +3309,9 @@
                 updateTierDistChart();
                 updateTierRetentionChart();
             }
-            // Organization module (compare not yet supported, use 'all')
+            // Organization module (comparison supported via dual datasets)
             if (charts.organization) {
-                switchOrg(globalDataScope === 'compare' ? 'all' : globalDataScope);
+                switchOrg(globalDataScope);
             }
             // Topic module
             if (charts.topic) {
@@ -5378,7 +5378,10 @@
         // ===== ORGANIZATION MODULE =====
         function switchOrg(type) {
             document.querySelectorAll('#module-organization .toggle-btn').forEach(b => b.classList.remove('active'));
-            if (typeof event !== 'undefined' && event.target && event.target.classList) {
+            if (type === 'compare') {
+                // In compare mode, no single toggle is active
+                document.querySelectorAll('#module-organization .toggle-btn').forEach(b => b.classList.add('active'));
+            } else if (typeof event !== 'undefined' && event.target && event.target.classList) {
                 event.target.classList.add('active');
             } else {
                 const activeBtn = document.querySelector(`#module-organization .toggle-btn[onclick*="switchOrg('${type}')"]`);
@@ -5390,9 +5393,11 @@
             
             let data, yearlyData;
             const isAll = type === 'all';
+            const isCompare = type === 'compare';
+            const isEx = type === 'ex';
             
             if (useYearly) {
-                yearlyData = isAll ? orgYearlyAll[selYear] : orgYearlyEx[selYear];
+                yearlyData = (isAll || isCompare) ? orgYearlyAll[selYear] : orgYearlyEx[selYear];
                 // Build a data adapter with yearly data + static names/retention
                 const retYearIdx = Math.max(0, selYear - 2020); // retentionByYear index (2020=0)
                 const names = orgAll.names;
@@ -5413,7 +5418,7 @@
                     _year: selYear
                 };
             } else {
-                data = isAll ? orgAll : orgEx;
+                data = isAll || isCompare ? orgAll : orgEx;
             }
             
             const fdIdx = 0; // 基金会 index
@@ -5464,21 +5469,31 @@
 
             // Update charts
             if (charts.organization) {
-                const fdIdxAll = 0;
-                // Donors chart
+                // Determine donors/amounts sources (yearly vs full)
+                const donorsAll = useYearly && orgYearlyAll[selYear] ? orgYearlyAll[selYear].donors : orgAll.donors;
+                const donorsEx = useYearly && orgYearlyEx[selYear] ? orgYearlyEx[selYear].donors : orgEx.donors;
+                const amountsAll = useYearly && orgYearlyAll[selYear] ? orgYearlyAll[selYear].amounts : orgAll.amounts;
+                const amountsEx = useYearly && orgYearlyEx[selYear] ? orgYearlyEx[selYear].amounts : orgEx.amounts;
+
+                // Donors chart - always update both datasets
                 charts.organization.donors.data.labels = data.names;
-                charts.organization.donors.data.datasets[0].data = data.donors.map(d => d > 0 ? d : 0);
+                charts.organization.donors.data.datasets[0].data = donorsAll.map(d => d > 0 ? d : 0);
+                charts.organization.donors.data.datasets[1].data = donorsEx.map(d => d > 0 ? d : 0);
+                charts.organization.donors.data.datasets[0].hidden = isEx && !isCompare;
+                charts.organization.donors.data.datasets[1].hidden = isAll && !isCompare;
                 charts.organization.donors.update();
 
-                // Amount chart
+                // Amount chart - always update both datasets
                 charts.organization.amount.data.labels = data.names;
-                charts.organization.amount.data.datasets[0].data = data.amounts.map(a => a > 0 ? a / 100000000 : 0);
+                charts.organization.amount.data.datasets[0].data = amountsAll.map(a => a > 0 ? a / 100000000 : 0);
+                charts.organization.amount.data.datasets[1].data = amountsEx.map(a => a > 0 ? a / 100000000 : 0);
+                charts.organization.amount.data.datasets[0].hidden = isEx && !isCompare;
+                charts.organization.amount.data.datasets[1].hidden = isAll && !isCompare;
                 charts.organization.amount.update();
 
                 // Retention chart - show both all and ex for comparison
                 charts.organization.retention.data.labels = data.names;
                 if (useYearly) {
-                    // For yearly mode, show year-specific retention from both orgAll and orgEx
                     const retYiAll = Math.max(0, selYear - 2020);
                     const retYiEx = Math.max(0, selYear - 2020);
                     charts.organization.retention.data.datasets[0].data = orgAll.retentionByYear[Math.min(retYiAll, orgAll.retentionByYear.length-1)].map(r => (r || 0) * 100);
@@ -5487,8 +5502,8 @@
                     charts.organization.retention.data.datasets[0].data = orgAll.retention.map(r => r * 100);
                     charts.organization.retention.data.datasets[1].data = orgEx.retention.map(r => r * 100);
                 }
-                charts.organization.retention.data.datasets[0].hidden = !isAll;
-                charts.organization.retention.data.datasets[1].hidden = isAll;
+                charts.organization.retention.data.datasets[0].hidden = isEx && !isCompare;
+                charts.organization.retention.data.datasets[1].hidden = isAll && !isCompare;
                 charts.organization.retention.update();
             }
 
@@ -5568,9 +5583,12 @@
                 type: 'bar',
                 data: {
                     labels: orgAll.names,
-                    datasets: [{ label: '月捐人数', data: orgAll.donors, backgroundColor: 'rgba(30, 58, 95, 0.8)', borderRadius: 4, datalabels: { color: '#1e3a5f', align: 'end', anchor: 'end', offset: 2, formatter: v => formatNumber(v), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }]
+                    datasets: [
+                        { label: '全部数据', data: orgAll.donors, backgroundColor: 'rgba(30, 58, 95, 0.8)', borderRadius: 4, datalabels: { color: '#1e3a5f', align: 'end', anchor: 'end', offset: 2, formatter: v => formatNumber(v), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } },
+                        { label: '常规机构（剔出HHAX）', data: orgEx.donors, backgroundColor: 'rgba(224, 123, 57, 0.8)', borderRadius: 4, hidden: true, datalabels: { color: '#e07b39', align: 'end', anchor: 'end', offset: 2, formatter: v => formatNumber(v), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
+                    ]
                 },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 50 } }, plugins: { legend: { display: false } }, scales: { x: { ticks: { callback: v => formatNumber(v) } } } }
+                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 50 } }, plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 8 } } }, scales: { x: { ticks: { callback: v => formatNumber(v) } } } }
             });
 
             const amountCtx = document.getElementById('org-amountChart').getContext('2d');
@@ -5578,9 +5596,12 @@
                 type: 'bar',
                 data: {
                     labels: orgAll.names,
-                    datasets: [{ label: '筹款额(亿)', data: orgAll.amounts.map(a => a / 100000000), backgroundColor: 'rgba(212, 168, 75, 0.8)', borderRadius: 4, datalabels: { color: '#b8942f', align: 'end', anchor: 'end', offset: 2, formatter: v => formatMoney(v * 100000000), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }]
+                    datasets: [
+                        { label: '全部数据', data: orgAll.amounts.map(a => a / 100000000), backgroundColor: 'rgba(212, 168, 75, 0.8)', borderRadius: 4, datalabels: { color: '#b8942f', align: 'end', anchor: 'end', offset: 2, formatter: v => formatMoney(v * 100000000), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } },
+                        { label: '常规机构（剔出HHAX）', data: orgEx.amounts.map(a => a / 100000000), backgroundColor: 'rgba(224, 123, 57, 0.65)', borderRadius: 4, hidden: true, datalabels: { color: '#e07b39', align: 'end', anchor: 'end', offset: 2, formatter: v => formatMoney(v * 100000000), font: { size: 10, weight: '600', family: "'Noto Sans SC', sans-serif" }, clip: false } }
+                    ]
                 },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 55 } }, plugins: { legend: { display: false } }, scales: { x: { ticks: { callback: v => v.toFixed(1) + '亿' } } } }
+                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', layout: { padding: { right: 55 } }, plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyleWidth: 8 } } }, scales: { x: { ticks: { callback: v => v.toFixed(1) + '亿' } } } }
             });
 
             const retCtx = document.getElementById('org-retentionChart').getContext('2d');
